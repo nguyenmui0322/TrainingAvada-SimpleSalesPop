@@ -1,0 +1,30 @@
+# Learn more about configuring your app at https://shopify.dev/docs/apps/tools/cli/configuration
+
+name = "Final-Exam"
+client_id = "461211aff39ddc4062d46fafc09220da"
+application_url = "https://legend-msg-sticker-truly.trycloudflare.com/auth/shopify"
+embedded = true
+
+[access_scopes]
+# Learn more at https://shopify.dev/docs/apps/tools/cli/configuration#access_scopes
+use_legacy_install_flow = true
+
+[auth]
+redirect_urls = [
+  "https://legend-msg-sticker-truly.trycloudflare.com/auth/shopify/callback",
+  "https://legend-msg-sticker-truly.trycloudflare.com/authSa/shopify/callback",
+  "https://legend-msg-sticker-truly.trycloudflare.com/auth/shopify/embed/callback",
+  "https://localhost:3000/auth/shopify/callback",
+  "https://localhost:3000/authSa/shopify/callback",
+  "https://localhost:3000/auth/shopify/embed/callback"
+]
+
+[webhooks]
+api_version = "2024-04"
+
+[pos]
+embedded = false
+
+[build]
+automatically_update_urls_on_dev = true
+dev_store_url = "quickstart-9e2ae7f9.myshopify.com"
