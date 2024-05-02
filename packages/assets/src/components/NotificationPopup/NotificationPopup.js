@@ -1,14 +1,19 @@
 import React from 'react';
 import './NoticationPopup.scss';
+import moment from 'moment';
+import {truncateString} from '../../helpers/truncateString';
+import PropTypes from 'prop-types';
 
 const NotificationPopup = ({
   firstName = 'John Doe',
   city = 'New York',
   country = 'United States',
   productName = 'Puffer Jacket With Hidden Hood',
-  timestamp = 'a day ago',
-  productImage = 'http://paris.mageplaza.com/images/shop/single/big-1.jpg'
+  timestamp = `${new Date()}`,
+  productImage = 'http://paris.mageplaza.com/images/shop/single/big-1.jpg',
+  settings = {hideTimeAgo: false, truncateProductName: false}
 }) => {
+  const {hideTimeAgo, truncateProductName} = settings;
   return (
     <div className="Avava-SP__Wrapper fadeInUp animated">
       <div className="Avava-SP__Inner">
@@ -24,11 +29,13 @@ const NotificationPopup = ({
               <div className={'Avada-SP__Title'}>
                 {firstName} in {city}, {country}
               </div>
-              <div className={'Avada-SP__Subtitle'}>purchased {productName}</div>
+              <div className={'Avada-SP__Subtitle'}>
+                purchased {truncateProductName ? truncateString(productName, 16) : productName}
+              </div>
               <div className={'Avada-SP__Footer'}>
-                {timestamp}{' '}
+                {hideTimeAgo ? '' : `${moment(timestamp).fromNow()}`}{' '}
                 <span className="uni-blue">
-                  <i className="fa fa-check" aria-hidden="true" /> by Avada
+                  <i className="fa fa-check" aria-hidden="true" /> by AVADA
                 </span>
               </div>
             </div>
@@ -39,6 +46,14 @@ const NotificationPopup = ({
   );
 };
 
-NotificationPopup.propTypes = {};
+NotificationPopup.propTypes = {
+  firstName: PropTypes.string,
+  city: PropTypes.string,
+  country: PropTypes.string,
+  productName: PropTypes.string,
+  timestamp: PropTypes.string,
+  productImage: PropTypes.string,
+  settings: PropTypes.object
+};
 
 export default NotificationPopup;

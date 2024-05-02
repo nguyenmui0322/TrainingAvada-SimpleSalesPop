@@ -13,7 +13,7 @@ export default function Home() {
   const {dispatch} = useStore();
 
   return (
-    <Page title="Dashboard">
+    <Page title="Home" fullWidth>
       <Layout>
         <Layout.Section>
           <SettingToggle
@@ -21,12 +21,16 @@ export default function Home() {
               content: enabled ? 'Disable' : 'Enable',
               onAction() {
                 setEnabled(prev => !prev);
-              }
+              },
+              variant: 'primary'
             }}
             enabled={enabled}
           >
             <Text variant="bodyMd" as="span">
-              Our app is {enabled ? 'enabled' : 'disabled'} on your store
+              App status is{' '}
+              <span style={{fontWeight: 650, color: 'black'}}>
+                {enabled ? 'enabled' : 'disabled'}
+              </span>{' '}
             </Text>
           </SettingToggle>
         </Layout.Section>

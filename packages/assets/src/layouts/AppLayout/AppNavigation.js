@@ -52,7 +52,7 @@ export default function AppNavigation() {
 
   return (
     <Navigation location="">
-      {!isEmbeddedApp && (
+      {/* {!isEmbeddedApp && (
         <Navigation.Section
           items={[
             {
@@ -62,7 +62,7 @@ export default function AppNavigation() {
             }
           ]}
         />
-      )}
+      )} */}
       <Navigation.Section
         fill
         separator

@@ -9,7 +9,7 @@ export default function AppBridgeProvider({children}) {
   const {push} = useHistory();
   const location = useLocation();
   const [appBridgeConfig] = useState(() => {
-    const host = getHost()
+    const host = getHost();
 
     return {
       host,
@@ -28,8 +28,12 @@ export default function AppBridgeProvider({children}) {
         }}
         navigationLinks={[
           {
-            label: 'Samples',
-            destination: '/samples'
+            label: 'Home',
+            destination: '/home'
+          },
+          {
+            label: 'Notifications',
+            destination: '/notifications'
           },
           {
             label: 'Settings',
