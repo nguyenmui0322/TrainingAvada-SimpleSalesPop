@@ -15,10 +15,10 @@ const Timing = ({label, value, onChange, helpText, suffix}) => {
             borderRadius: '1px',
             border: '1px solid #ddd',
             padding: '5px 10px',
-            width: '100px'
+            width: '110px'
           }}
         >
-          {value + ' ' + suffix}
+          {`${value} ${suffix}`}
         </div>
       }
       helpText={helpText}

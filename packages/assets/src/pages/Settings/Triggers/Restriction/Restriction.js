@@ -2,7 +2,7 @@ import {LegacyCard, Select, TextField} from '@shopify/polaris';
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const Restriction = ({settings, onChangeInput}) => {
+const Restriction = ({settings, handleChangeInput}) => {
   const {includedUrls, excludedUrls, allowShow} = settings;
 
   const options = [
@@ -13,7 +13,7 @@ const Restriction = ({settings, onChangeInput}) => {
         <TextField
           label="Excluded pages"
           value={excludedUrls}
-          onChange={value => onChangeInput('excludedUrls', value)}
+          onChange={value => handleChangeInput('excludedUrls', value)}
           autoComplete="off"
           selectTextOnFocus
           multiline={4}
@@ -25,28 +25,26 @@ const Restriction = ({settings, onChangeInput}) => {
       label: 'Specific pages',
       value: 'specific',
       page: (
-        <div>
+        <>
           <TextField
             label="Included pages"
             value={includedUrls}
-            onChange={value => onChangeInput('includedUrls', value)}
+            onChange={value => handleChangeInput('includedUrls', value)}
             autoComplete="off"
             selectTextOnFocus
             multiline={4}
             helpText="Page URLs to show the pop-up (separated by new lines)"
           />
-          <div style={{marginTop: '15px'}}>
-            <TextField
-              label="Excluded pages"
-              value={excludedUrls}
-              onChange={value => onChangeInput('excludedUrls', value)}
-              autoComplete="off"
-              selectTextOnFocus
-              multiline={4}
-              helpText="Page URLs NOT to show the pop-up (separated by new lines)"
-            />
-          </div>
-        </div>
+          <TextField
+            label="Excluded pages"
+            value={excludedUrls}
+            onChange={value => handleChangeInput('excludedUrls', value)}
+            autoComplete="off"
+            selectTextOnFocus
+            multiline={4}
+            helpText="Page URLs NOT to show the pop-up (separated by new lines)"
+          />
+        </>
       )
     }
   ];
@@ -55,12 +53,10 @@ const Restriction = ({settings, onChangeInput}) => {
     <LegacyCard title="PAGES RESTRICTION" sectioned>
       <Select
         options={options}
-        onChange={value => onChangeInput('allowShow', value)}
+        onChange={value => handleChangeInput('allowShow', value)}
         value={allowShow}
       />
-      <div style={{marginTop: '15px'}}>
-        {options.find(option => option.value === allowShow).page}
-      </div>
+      {options.find(option => option.value === allowShow).page}
     </LegacyCard>
   );
 };
@@ -69,5 +65,5 @@ export default Restriction;
 
 Restriction.propTypes = {
   settings: PropTypes.object,
-  onChangeInput: PropTypes.func
+  handleChangeInput: PropTypes.func
 };
