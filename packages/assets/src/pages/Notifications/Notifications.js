@@ -11,6 +11,7 @@ import React, {useState} from 'react';
 import NotificationPopup from '../../components/NotificationPopup';
 import useFetchApi from '../../hooks/api/useFetchApi';
 import moment from 'moment';
+import usePaginate from '../../hooks/api/usePaginate';
 
 /**
  * Just render a sample page
@@ -20,9 +21,13 @@ import moment from 'moment';
  */
 export default function Notifications() {
   const [selectedProducts, setSelectedProducts] = useState([]);
-  const [sortValue, setSortValue] = useState('DATE_MODIFIED_DESC');
+  const [sortValue, setSortValue] = useState('createdAt:desc');
 
-  const {data: items, loading} = useFetchApi({url: '/notifications'});
+  const {data: items, loading, prevPage, nextPage, pageInfo, onQueryChange} = usePaginate({
+    url: '/notifications',
+    defaultLimit: 10,
+    defaultSort: 'createdAt:desc'
+  });
 
   const {data: valueSetting} = useFetchApi({url: '/settings'});
 
@@ -32,8 +37,8 @@ export default function Notifications() {
   };
 
   const sortOptions = [
-    {label: 'Newest update', value: 'DATE_MODIFIED_DESC'},
-    {label: 'Oldest update', value: 'DATE_MODIFIED_ASC'}
+    {label: 'Newest update', value: 'createdAt:desc'},
+    {label: 'Oldest update', value: 'createdAt:asc'}
   ];
 
   const renderItem = item => {
@@ -77,11 +82,13 @@ export default function Notifications() {
           sortValue={sortValue}
           onSortChange={selected => {
             setSortValue(selected);
+            onQueryChange('sort', selected, true);
           }}
           pagination={{
-            hasNext: true,
-            hasPrevious: true,
-            onNext: () => {}
+            hasPrevious: pageInfo.hasPre,
+            onPrevious: prevPage,
+            hasNext: pageInfo.hasNext,
+            onNext: nextPage
           }}
           selectable
         />

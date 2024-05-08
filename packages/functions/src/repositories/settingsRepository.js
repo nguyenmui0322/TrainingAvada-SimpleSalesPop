@@ -1,5 +1,6 @@
 import {presentDataAndFormatDate} from '@avada/firestore-utils';
 import {Firestore} from '@google-cloud/firestore';
+import defaultSettings from '../helpers/defaultSettings';
 
 /**
  * @documentation
@@ -21,4 +22,10 @@ export const updateSettingsRepo = async ({shopID, data}) => {
   const settings = await getSettingsRepo(shopID);
 
   await collection.doc(settings.id).update(data);
+};
+
+export const addDefaultSettings = async shopData => {
+  const shopID = shopData.id;
+
+  await collection.add({...defaultSettings, shopID});
 };

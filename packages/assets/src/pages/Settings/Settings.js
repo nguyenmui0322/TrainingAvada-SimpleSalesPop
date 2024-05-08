@@ -23,12 +23,12 @@ export default function Settings() {
   });
 
   const items = {
-    firstName: 'John Doe',
-    city: 'New York',
-    country: 'United States',
-    productName: 'Puffer Jacket With Hidden Hood',
+    firstName: 'Russell',
+    city: 'Toronto',
+    country: 'Canada',
+    productName: 'Selling Plans Ski Wax',
     productImage:
-      'https://images.pexels.com/photos/2529148/pexels-photo-2529148.jpeg?auto=compress&cs=tinysrgb&w=600'
+      'https://cdn.shopify.com/s/files/1/0590/3751/5864/files/snowboard_wax.png?v=1714009004'
   };
 
   const handleTabChange = useCallback(selectedTabIndex => setSelected(selectedTabIndex), []);
