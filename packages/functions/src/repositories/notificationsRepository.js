@@ -10,7 +10,7 @@ const firestore = new Firestore();
 /** @type CollectionReference */
 const collection = firestore.collection('notifications');
 
-export const getListNotificationRepo = async ({shopID, limit, page, sort}) => {
+export const getNotifications = async ({shopID, limit, page, sort}) => {
   limit = Number(limit);
   page = Number(page);
 
@@ -45,6 +45,6 @@ export const getListNotificationRepo = async ({shopID, limit, page, sort}) => {
   };
 };
 
-export const addNotification = async notifications => {
+export const addNotifications = async notifications => {
   await Promise.all(notifications.map(async notification => await collection.add(notification)));
 };

@@ -9,15 +9,13 @@ export const getNotifications = async ctx => {
     const shopData = await getShopByShopifyDomain(shopifyDomain);
     const shopID = shopData.id;
     const [{notifications}, settings] = await Promise.all([
-      notificationsRepository.getListNotificationRepo({shopID}),
-      settingsRepository.getSettingsRepo(shopID)
+      notificationsRepository.getNotifications({shopID}),
+      settingsRepository.getSettings(shopID)
     ]);
 
     ctx.body = {
-      data: {
-        settings,
-        notifications
-      }
+      settings,
+      notifications
     };
   } catch (error) {
     console.log(error);

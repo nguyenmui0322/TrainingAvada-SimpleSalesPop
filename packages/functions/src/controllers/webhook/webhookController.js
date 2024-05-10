@@ -5,19 +5,19 @@ import * as notificationServices from '../../services/notificationServices';
 
 export const listenNewOrder = async ctx => {
   try {
-    const orderData = [ctx.req.body];
+    const orderList = [ctx.req.body];
     const shopifyDomain = ctx.get('X-Shopify-Shop-Domain');
     const shopData = await getShopByShopifyDomain(shopifyDomain);
     const shopify = new Shopify({
       shopName: shopifyDomain,
       accessToken: shopData.accessToken
     });
-    const notifications = await notificationServices.getNotificationItem(
+    const notifications = await notificationServices.getNotificationsItem(
       shopify,
-      orderData,
+      orderList,
       shopData
     );
-    await notificationsRepository.addNotification(notifications);
+    await notificationsRepository.addNotifications(notifications);
 
     ctx.body = {
       success: true

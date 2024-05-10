@@ -11,13 +11,19 @@ export const afterInstall = async ctx => {
       shopName: shopData.shopifyDomain,
       accessToken: shopData.accessToken
     });
-    const orderData = await shopify.order.list({limit: 30});
 
-    await Promise.all([
-      addNotificationServices(shopify, orderData, shopData),
-      addDefaultSettings(shopData)
-    ]);
+    await Promise.all([syncNotifications({shopify, shopData}), addDefaultSettings(shopData)]);
   } catch (error) {
     console.log(error);
   }
 };
+
+/**
+ *
+ * @param {*} param0
+ */
+async function syncNotifications({shopify, shopData}) {
+  const orderData = await shopify.order.list({limit: 30});
+
+  await addNotificationServices(shopify, orderData, shopData);
+}

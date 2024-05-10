@@ -12,14 +12,14 @@ const firestore = new Firestore();
 /** @type CollectionReference */
 const collection = firestore.collection('settings');
 
-export const getSettingsRepo = async shopID => {
+export const getSettings = async shopID => {
   const {docs: settings} = await collection.where('shopID', '==', shopID).get();
 
   return presentDataAndFormatDate(settings[0]);
 };
 
-export const updateSettingsRepo = async ({shopID, data}) => {
-  const settings = await getSettingsRepo(shopID);
+export const updateSettings = async ({shopID, data}) => {
+  const settings = await getSettings(shopID);
 
   await collection.doc(settings.id).update(data);
 };

@@ -1,12 +1,12 @@
-import {addNotification} from '../repositories/notificationsRepository';
+import * as notificationsRepository from '../repositories/notificationsRepository';
 import * as notificationServices from '../services/notificationServices';
 
 export const addNotificationServices = async (shopify, orderData, shopData) => {
-  const notifications = await notificationServices.getNotificationItem(
+  const notifications = await notificationServices.getNotificationsItem(
     shopify,
     orderData,
     shopData
   );
 
-  await addNotification(notifications);
+  await notificationsRepository.addNotifications(notifications);
 };

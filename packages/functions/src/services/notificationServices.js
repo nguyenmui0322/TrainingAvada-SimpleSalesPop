@@ -1,4 +1,4 @@
-export const getNotificationItem = async (shopify, orderData, shopData) => {
+export const getNotificationsItem = async (shopify, orderData, shopData) => {
   const shopID = shopData.id;
   const shopifyDomain = shopData.shopifyDomain;
 

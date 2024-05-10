@@ -1,10 +1,10 @@
-import {getSettingsRepo, updateSettingsRepo} from '@functions/repositories/settingsRepository';
+import * as settingsRepository from '../repositories/settingsRepository';
 import {getCurrentShop} from '../helpers/auth';
 
 export const getSettings = async ctx => {
   try {
     const shopID = getCurrentShop(ctx);
-    const settings = await getSettingsRepo(shopID);
+    const settings = await settingsRepository.getSettings(shopID);
 
     ctx.body = {
       data: settings,
@@ -23,7 +23,7 @@ export const updateSettings = async ctx => {
   try {
     const shopID = getCurrentShop(ctx);
     const {data} = ctx.req.body;
-    await updateSettingsRepo({shopID, data});
+    await settingsRepository.updateSettings({shopID, data});
 
     ctx.status = 200;
     ctx.body = {

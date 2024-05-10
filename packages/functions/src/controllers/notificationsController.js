@@ -1,11 +1,16 @@
-import {getListNotificationRepo} from '../repositories/notificationsRepository';
+import * as notificationsRepository from '../repositories/notificationsRepository';
 import {getCurrentShop} from '../helpers/auth';
 
-export async function getListNotification(ctx) {
+export async function getNotifications(ctx) {
   try {
     const shopID = getCurrentShop(ctx);
     const {limit, page, sort} = ctx.query;
-    const {notifications, pageInfo} = await getListNotificationRepo({shopID, limit, page, sort});
+    const {notifications, pageInfo} = await notificationsRepository.getNotifications({
+      shopID,
+      limit,
+      page,
+      sort
+    });
 
     ctx.body = {
       data: notifications,
