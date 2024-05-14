@@ -2,7 +2,10 @@ import {getShopByShopifyDomain} from '@avada/core';
 import * as notificationsRepository from '../../repositories/notificationsRepository';
 import Shopify from 'shopify-api-node';
 import * as notificationServices from '../../services/notificationServices';
-
+/**
+ *
+ * @param {*} ctx
+ */
 export const listenNewOrder = async ctx => {
   try {
     const orderList = [ctx.req.body];
@@ -12,11 +15,11 @@ export const listenNewOrder = async ctx => {
       shopName: shopifyDomain,
       accessToken: shopData.accessToken
     });
-    const notifications = await notificationServices.getNotificationsItem(
+    const notifications = await notificationServices.getNotificationsItem({
       shopify,
-      orderList,
+      orderData: orderList,
       shopData
-    );
+    });
     await notificationsRepository.addNotifications(notifications);
 
     ctx.body = {

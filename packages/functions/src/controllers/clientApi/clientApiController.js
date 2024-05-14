@@ -1,8 +1,10 @@
 import * as notificationsRepository from '../../repositories/notificationsRepository';
 import * as settingsRepository from '../../repositories/settingsRepository';
-
 import {getShopByShopifyDomain} from '@avada/core';
-
+/**
+ *
+ * @param {*} ctx
+ */
 export const getNotifications = async ctx => {
   try {
     const {shopifyDomain} = ctx.req.query;

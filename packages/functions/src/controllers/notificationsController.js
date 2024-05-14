@@ -1,6 +1,9 @@
 import * as notificationsRepository from '../repositories/notificationsRepository';
 import {getCurrentShop} from '../helpers/auth';
-
+/**
+ *
+ * @param {*} ctx
+ */
 export async function getNotifications(ctx) {
   try {
     const shopID = getCurrentShop(ctx);

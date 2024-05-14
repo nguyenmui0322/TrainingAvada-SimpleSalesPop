@@ -1,6 +1,9 @@
 import * as settingsRepository from '../repositories/settingsRepository';
 import {getCurrentShop} from '../helpers/auth';
-
+/**
+ *
+ * @param {*} ctx
+ */
 export const getSettings = async ctx => {
   try {
     const shopID = getCurrentShop(ctx);
@@ -18,7 +21,10 @@ export const getSettings = async ctx => {
     };
   }
 };
-
+/**
+ *
+ * @param {*} ctx
+ */
 export const updateSettings = async ctx => {
   try {
     const shopID = getCurrentShop(ctx);

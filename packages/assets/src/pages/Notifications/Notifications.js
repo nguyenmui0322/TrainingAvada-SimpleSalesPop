@@ -25,7 +25,7 @@ export default function Notifications() {
 
   const {data: items, loading, prevPage, nextPage, pageInfo, onQueryChange} = usePaginate({
     url: '/notifications',
-    defaultLimit: 10,
+    defaultLimit: 20,
     defaultSort: 'createdAt:desc'
   });
 

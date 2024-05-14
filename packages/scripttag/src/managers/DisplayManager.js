@@ -9,20 +9,36 @@ export default class DisplayManager {
     this.settings = {};
   }
   async initialize({notifications, settings}) {
-    this.notifications = notifications;
-    this.settings = settings;
+    if (this.isShowPopupUrls(settings)) {
+      this.notifications = notifications;
+      this.settings = settings;
+      await delay(this.settings.firstDelay);
+      const toDisplayNotis = this.notifications.slice(0, this.settings.maxPopsDisplay);
 
-    // Your display logic here
-    await delay(this.settings.firstDelay);
-    for (let i = 0; i < Math.min(this.settings.maxPopsDisplay, this.notifications.length); i++) {
-      this.insertContainer();
-      this.display({notification: this.notifications[i], position: this.settings.position});
-      await delay(this.settings.displayDuration);
-      this.fadeOut();
-      await delay(this.settings.popsInterval);
+      for (const notification of toDisplayNotis) {
+        this.insertContainer();
+        this.display({notification, position: this.settings.position});
+        await delay(this.settings.displayDuration);
+        this.fadeOut();
+        await delay(this.settings.popsInterval);
+      }
     }
-    // Sample display first one
-    // await this.display({notification: notifications[0]});
+  }
+
+  isShowPopupUrls(settings) {
+    const {includedUrls, excludedUrls, allowShow} = settings;
+    const currentUrl = window.location.href;
+
+    const includedUrlsList = includedUrls.split('\n').map(url => url.trim());
+    const excludedUrlsList = excludedUrls.split('\n').map(url => url.trim());
+
+    if (allowShow === 'all' && !excludedUrlsList.includes(currentUrl)) {
+      return true;
+    }
+    if (allowShow === 'specific' && includedUrlsList.includes(currentUrl)) {
+      return true;
+    }
+    return false;
   }
 
   fadeOut() {

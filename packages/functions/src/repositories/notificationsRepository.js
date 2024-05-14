@@ -9,7 +9,11 @@ import {Firestore} from '@google-cloud/firestore';
 const firestore = new Firestore();
 /** @type CollectionReference */
 const collection = firestore.collection('notifications');
-
+/**
+ *
+ * @param {string, string, string, string} param0
+ * @returns {Object}
+ */
 export const getNotifications = async ({shopID, limit, page, sort}) => {
   limit = Number(limit);
   page = Number(page);
@@ -44,7 +48,10 @@ export const getNotifications = async ({shopID, limit, page, sort}) => {
     pageInfo: pageInfo
   };
 };
-
+/**
+ *
+ * @param {Array} notifications
+ */
 export const addNotifications = async notifications => {
   await Promise.all(notifications.map(async notification => await collection.add(notification)));
 };
