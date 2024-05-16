@@ -11,7 +11,10 @@ const firestore = new Firestore();
 const collection = firestore.collection('notifications');
 /**
  *
- * @param {string, string, string, string} param0
+ * @param {string} shopID
+ * @param {string} limit
+ * @param {string} page
+ * @param {string} sort
  * @returns {Object}
  */
 export const getNotifications = async ({shopID, limit, page, sort}) => {
@@ -50,8 +53,8 @@ export const getNotifications = async ({shopID, limit, page, sort}) => {
 };
 /**
  *
- * @param {Array} notifications
+ * @param notifications
  */
 export const addNotifications = async notifications => {
-  await Promise.all(notifications.map(async notification => await collection.add(notification)));
+  await Promise.all(notifications.map(notification => collection.add(notification)));
 };

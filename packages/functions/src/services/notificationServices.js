@@ -1,7 +1,9 @@
 /**
  *
- * @param {Object} param0
- * @returns
+ * @param {Shopify} shopify
+ * @param {Object} shopData
+ * @param {Array} orderData
+ * @returns {Object}
  */
 export const getNotificationsItem = async ({shopify, shopData, orderData = []}) => {
   const shopID = shopData.id;

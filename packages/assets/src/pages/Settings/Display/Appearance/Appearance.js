@@ -66,6 +66,8 @@ const Appearance = ({settings, handleChangeInput}) => {
               onChange={value => handleChangeInput('displayDuration', value)}
               helpText="How long each pop will display on your page."
               suffix={'second(s)'}
+              minValue={0}
+              maxValue={100}
             />
             <Timing
               label="Time before the first pop"
@@ -73,6 +75,8 @@ const Appearance = ({settings, handleChangeInput}) => {
               onChange={value => handleChangeInput('firstDelay', value)}
               helpText="The delay time before the first notification."
               suffix={'second(s)'}
+              minValue={0}
+              maxValue={100}
             />
           </Grid.Cell>
           <Grid.Cell columnSpan={{xs: 6, sm: 3, md: 3, lg: 6, xl: 6}}>
@@ -82,6 +86,8 @@ const Appearance = ({settings, handleChangeInput}) => {
               onChange={value => handleChangeInput('popsInterval', value)}
               helpText="The time interval between two popup notifications."
               suffix={'second(s)'}
+              minValue={0}
+              maxValue={100}
             />
             <Timing
               label="Maximum of popups"
@@ -89,6 +95,8 @@ const Appearance = ({settings, handleChangeInput}) => {
               onChange={value => handleChangeInput('maxPopsDisplay', value)}
               helpText="The maximum number of popups are allowed to show after page loading. Maximum number is 80."
               suffix={'pop(s)'}
+              minValue={0}
+              maxValue={80}
             />
           </Grid.Cell>
         </Grid>

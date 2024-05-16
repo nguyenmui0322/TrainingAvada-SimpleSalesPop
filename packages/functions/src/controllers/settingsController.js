@@ -14,7 +14,7 @@ export const getSettings = async ctx => {
       success: true
     };
   } catch (error) {
-    console.log(error);
+    console.error(error);
     ctx.status = 500;
     ctx.body = {
       success: false
@@ -36,7 +36,7 @@ export const updateSettings = async ctx => {
       success: true
     };
   } catch (error) {
-    console.log(error);
+    console.error(error);
     ctx.status = 500;
     ctx.body = {
       success: false

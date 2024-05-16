@@ -2,7 +2,9 @@ import * as notificationsRepository from '../repositories/notificationsRepositor
 import * as notificationServices from '../services/notificationServices';
 /**
  *
- * @param {Object} param0
+ * @param {Shopify} shopify
+ * @param {Array} orderData
+ * @param {Object} shopData
  */
 export const addNotificationServices = async ({shopify, orderData, shopData}) => {
   const notifications = await notificationServices.getNotificationsItem({

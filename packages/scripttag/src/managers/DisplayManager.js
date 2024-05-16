@@ -3,25 +3,28 @@ import {render} from 'preact';
 import React from 'preact/compat';
 import NotificationPopup from '../components/NotificationPopup/NotificationPopup';
 import delay from '../helpers/delay';
+
 export default class DisplayManager {
   constructor() {
     this.notifications = [];
     this.settings = {};
   }
   async initialize({notifications, settings}) {
-    if (this.isShowPopupUrls(settings)) {
-      this.notifications = notifications;
-      this.settings = settings;
-      await delay(this.settings.firstDelay);
-      const toDisplayNotis = this.notifications.slice(0, this.settings.maxPopsDisplay);
+    if (!this.isShowPopupUrls(settings)) {
+      return;
+    }
 
-      for (const notification of toDisplayNotis) {
-        this.insertContainer();
-        this.display({notification, position: this.settings.position});
-        await delay(this.settings.displayDuration);
-        this.fadeOut();
-        await delay(this.settings.popsInterval);
-      }
+    this.notifications = notifications;
+    this.settings = settings;
+    await delay(this.settings.firstDelay);
+    const toDisplayNotis = this.notifications.slice(0, this.settings.maxPopsDisplay);
+
+    for (const notification of toDisplayNotis) {
+      this.insertContainer();
+      this.display({notification, position: this.settings.position, settings});
+      await delay(this.settings.displayDuration);
+      this.fadeOut();
+      await delay(this.settings.popsInterval);
     }
   }
 
@@ -46,9 +49,12 @@ export default class DisplayManager {
     container.innerHTML = '';
   }
 
-  display({notification, position}) {
+  display({notification, position, settings}) {
     const container = document.querySelector('#Avada-SalePop');
-    render(<NotificationPopup {...notification} position={position} />, container);
+    render(
+      <NotificationPopup {...notification} position={position} settings={settings} />,
+      container
+    );
   }
 
   insertContainer() {

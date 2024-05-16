@@ -22,13 +22,14 @@ export const afterInstall = async ctx => {
       createWebhookOrder(shopify)
     ]);
   } catch (error) {
-    console.log(error);
+    console.error(error);
   }
 };
 
 /**
  *
- * @param {Object} param0
+ * @param {Shopify} shopify
+ * @param {Object} shopData
  */
 async function syncNotifications({shopify, shopData}) {
   const orderData = await shopify.order.list({limit: 30});

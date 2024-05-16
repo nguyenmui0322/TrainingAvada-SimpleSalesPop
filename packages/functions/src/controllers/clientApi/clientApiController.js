@@ -20,7 +20,7 @@ export const getNotifications = async ctx => {
       notifications
     };
   } catch (error) {
-    console.log(error);
+    console.error(error);
     ctx.body = {
       success: false
     };

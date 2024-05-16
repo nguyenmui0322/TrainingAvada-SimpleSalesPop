@@ -26,7 +26,7 @@ export const listenNewOrder = async ctx => {
       success: true
     };
   } catch (error) {
-    console.log(error);
+    console.error(error);
     ctx.body = {
       success: false
     };

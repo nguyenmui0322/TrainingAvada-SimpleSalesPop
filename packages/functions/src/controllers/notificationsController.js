@@ -21,7 +21,7 @@ export async function getNotifications(ctx) {
       success: true
     };
   } catch (error) {
-    console.log(error);
+    console.error(error);
     ctx.status = 500;
     ctx.body = {
       success: false
