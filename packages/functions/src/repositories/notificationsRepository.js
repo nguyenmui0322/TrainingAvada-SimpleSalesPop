@@ -58,3 +58,14 @@ export const getNotifications = async ({shopID, limit, page, sort}) => {
 export const addNotifications = async notifications => {
   await Promise.all(notifications.map(notification => collection.add(notification)));
 };
+
+export async function deleteNotifications(notificationIds) {
+  const batch = firestore.batch();
+
+  notificationIds.forEach(notificationId => {
+    const notificationRef = collection.doc(notificationId);
+    batch.delete(notificationRef);
+  });
+
+  await batch.commit();
+}

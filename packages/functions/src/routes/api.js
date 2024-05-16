@@ -18,6 +18,7 @@ export default function apiRouter(isEmbed = false) {
   router.get('/notifications', notificationsController.getNotifications);
   router.get('/settings', settingsController.getSettings);
   router.put('/settings', settingsController.updateSettings);
+  router.delete('/notifications', notificationsController.deleteNotifications);
 
   return router;
 }

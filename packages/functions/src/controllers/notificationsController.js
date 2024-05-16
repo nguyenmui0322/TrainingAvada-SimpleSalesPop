@@ -28,3 +28,18 @@ export async function getNotifications(ctx) {
     };
   }
 }
+
+export async function deleteNotifications(ctx) {
+  try {
+    const {data: notificationIds} = ctx.req.body;
+    await notificationsRepository.deleteNotifications(notificationIds);
+    ctx.body = {
+      success: true
+    };
+  } catch (error) {
+    console.error(error);
+    ctx.body = {
+      success: false
+    };
+  }
+}

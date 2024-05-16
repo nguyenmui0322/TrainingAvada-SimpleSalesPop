@@ -12,6 +12,7 @@ import NotificationPopup from '../../components/NotificationPopup';
 import useFetchApi from '../../hooks/api/useFetchApi';
 import moment from 'moment';
 import usePaginate from '../../hooks/api/usePaginate';
+import useDeleteApi from '../../hooks/api/useDeleteApi';
 
 /**
  * Just render a sample page
@@ -31,6 +32,8 @@ export default function Notifications() {
 
   const {data: valueSetting} = useFetchApi({url: '/settings'});
 
+  const {handleDelete} = useDeleteApi({url: '/notifications'});
+
   const resourceName = {
     singular: 'notification',
     plural: 'notifications'
@@ -39,6 +42,17 @@ export default function Notifications() {
   const sortOptions = [
     {label: 'Newest update', value: 'createdAt:desc'},
     {label: 'Oldest update', value: 'createdAt:asc'}
+  ];
+
+  const promotedBulkActions = [
+    {
+      content: 'Delete',
+      onAction: async () => {
+        await handleDelete(selectedProducts),
+          await onQueryChange('page', 1, true),
+          setSelectedProducts([]);
+      }
+    }
   ];
 
   const renderItem = item => {
@@ -77,6 +91,7 @@ export default function Notifications() {
           items={items}
           renderItem={renderItem}
           selectedItems={selectedProducts}
+          promotedBulkActions={promotedBulkActions}
           onSelectionChange={setSelectedProducts}
           sortOptions={sortOptions}
           sortValue={sortValue}
